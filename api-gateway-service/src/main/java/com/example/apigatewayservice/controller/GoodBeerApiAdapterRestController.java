@@ -4,6 +4,7 @@ import com.example.apigatewayservice.client.BeerClient;
 import com.example.apigatewayservice.dto.Beer;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class GoodBeerApiAdapterRestController {
     }
 
     @HystrixCommand(fallbackMethod = "fallback")
+    @CrossOrigin(origins = "*")
     @GetMapping("/good-beers")
     public Collection<Beer> goodBeers() {
         return beerClient.readBeers()
